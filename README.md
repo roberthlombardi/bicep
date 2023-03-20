@@ -11,6 +11,11 @@ They all loop using the same list, and network security groups and route tables 
 
 - Subnet delegation: For each subnet in the loop, there is an option to delegate it to a specific Azure service
 ![delegations](./media/delegations.png)
+    - To find the currently available delegations for your subnet:
+
+  ```PowerShell
+    az network vnet subnet list-available-delegations -l "location" -g "ResourceGroupExample" -o table
+  ```
 
 - NAT Gateway: For each subnet in the loop, there's an option to a attach a NAT gateway.
     - In order to attach a NAT gateway, the parameters "natGatewayName", and "natGatewayResourceGroup" must be filled in.
