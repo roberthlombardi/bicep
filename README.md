@@ -20,7 +20,7 @@ They all loop using the same list, and network security groups and route tables 
   ```
 
 - NAT Gateway: For each subnet in the loop, there's an option to a attach a NAT gateway.
-    - In order to attach a NAT gateway, the parameters "natGatewayName", and "natGatewayResourceGroup" must be filled in.
+    - In order to attach a NAT gateway, the parameters "natGatewayName", and "natGatewayResourceGroup" must exist.
 
     - These values are conditionals, if they are left empty a NAT gateway will not be attached.
     Note that the NAT gateway currently must reside in the same subscription as the virtual network deployment.
@@ -44,8 +44,14 @@ They all loop using the same list, and network security groups and route tables 
 - subnet.delegations
 - subnet.natGatewayName
 - subnet.natGatewayResourceGroup
-- subnet.securityRules array
+- subnet.securityRules array 
+
+![securityRules](./media/securityRules.png)
+
 - subnet.routes array
+
+![routes](./media/routes.png)
+
 - tags object
 
 

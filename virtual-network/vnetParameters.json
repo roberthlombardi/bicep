@@ -14,53 +14,18 @@
       "subnets": {
         "value": [
           {
-            "name": "example-subnet1",
+            "name": "example-snet1",
             "subnetPrefix": "10.0.0.0/24",
-            "delegations": {},
-            "natGatewayName": "",
-            "natGatewayResourceGroup": "",
-            "securityRules": [
+            "delegations": [
               {
-                "name": "allowOutbound443",
+                "name": "containerInstance",
                 "properties": {
-                  "access": "allow",
-                  "destinationAddressPrefix": "Internet",
-                  "destinationPortRange": "443",
-                  "direction": "outbound",
-                  "priority": "1000",
-                  "protocol": "*",
-                  "sourceAddressPrefixes": ["10.50.0.0/24"],
-                  "sourcePortRange": "*"
-                }
-              } 
-            ],
-            "routes": []
-          },
-          {
-            "name": "example-subnet2",
-            "subnetPrefix": "10.0.1.0/24",
-            "delegations": {},
-            "natGatewayName": "",
-            "natGatewayResourceGroup": "",
-            "securityRules": [
-              {
-                "name": "allowInbound443",
-                "properties": {
-                  "access": "allow",
-                  "destinationAddressPrefixes": ["10.1.0.0/24"],
-                  "destinationPortRanges": ["443"],
-                  "direction": "inbound",
-                  "priority": "1000",
-                  "protocol": "*",
-                  "sourceAddressPrefix": "Internet",
-                  "sourcePortRange": "*"
+                  "serviceName": "Microsoft.ContainerInstance/containerGroups"
                 }
               }
-            ],
-            "routes": []
+            ]
           }
         ]
-        
       }
     }
   }

@@ -13,8 +13,8 @@ param subnets array
 param tags object = {}
 
 resource natGateway 'Microsoft.Network/natGateways@2022-09-01' existing = [for (natGateway, i) in subnets: {
-  name: natGateway.natGatewayName
-  scope: resourceGroup(natGateway.natGatewayResourceGroup)
+  name: contains(natGateway, 'natGatewayName') ? natGateway.natGatewayName : ''
+  scope: resourceGroup(contains(natGateway, 'natGatewayResourceGroup') ? natGateway.natGatewayResourceGroup : '')
 }]
 
 // below block loops through the array 'subnets' with same name as subnet, but replaces 'snet' with 'nsg'
@@ -22,7 +22,7 @@ resource networkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2021-08-0
   name: replace(nsg.name, 'snet', 'nsg')
   location: location
   properties: {
-    securityRules: nsg.securityRules
+    securityRules: contains(nsg, 'securityRules') ? nsg.securityRules: []
   }
   tags: tags
 }]
@@ -33,7 +33,7 @@ resource routeTable 'Microsoft.Network/routeTables@2022-09-01' = [for (rt, i) in
   location: location
   properties: {
     disableBgpRoutePropagation: true
-    routes: rt.routes
+    routes: contains(rt, 'routes') ? rt.routes : []
   }
   tags: tags
 }]
@@ -58,25 +58,16 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2021-05-01' = {
           id: routeTable[i].id
         }
         // below block is a conditional. if the subnet param does not have an entry named "delegations", no subnet delegation will happen 
-        delegations: subnet.delegations != {} ? [
-          {
-            name: subnet.delegations.name
-            properties: {
-              serviceName: subnet.delegations.serviceName
-            }
-          }
-        ] : []
-        // below block is a conditional. if the subnet.natGatewayName parameter is '' this step will be skipped.
-        natGateway: subnet.natGatewayName != '' ? {
-          id: natGateway[i].id
-        } : null
+        delegations: contains(subnet, 'delegations') ? subnet.delegations : []
+        // below block is a conditional. if the subnet.natGatewayName parameter is is missing this step will be skipped.
+        natGateway: contains(subnet, 'natGatewayName') ? { id: natGateway[i].id } : null
       }
     }]
   }
   tags: tags
 }
 
-output subnets array = [for (subnets, i) in subnets: { 
+output subnets array = [for (outputs, i) in subnets: { 
   nsgName: networkSecurityGroup[i].name
   nsgId: networkSecurityGroup[i].id
   rtName: routeTable[i].name
