@@ -24,3 +24,30 @@ They all loop using the same list, and network security groups and route tables 
     Note that the NAT gateway currently must reside in the same subscription as the virtual network deployment.
 
     ![natGatewayParameters](./media/natGatewayParameters.png)
+
+## Required parameters
+
+- virtualNetworkName string
+- virtualNetworkAddressPrefixes array
+- subnets array
+- subnets.name string
+- subnets.subnetPrefix
+
+## Optional parameters
+- location string
+- subnet.delegations
+- subnet.natGatewayName
+- subnet.natGatewayResourceGroup
+- subnet.securityRules array
+- subnet.routes array
+- tags object
+
+## How to deploy
+
+  ```PowerShell
+az group create -n "ResourceGroupExample" -l "location"
+  ```
+
+  ```PowerShell
+    az deployment group create -g "ResourceGroupExample" -f .\virtual-network\main.bicep -p .\virtual-network\vnetParameters.json
+  ```
