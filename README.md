@@ -2,6 +2,8 @@
 
 This repository contains a virtual network module with support for looping subnets, network security groups, and route tables.
 
+
+
 ## What does the module support?
 
 The following features are supported:
@@ -25,6 +27,8 @@ They all loop using the same list, and network security groups and route tables 
 
     ![natGatewayParameters](./media/natGatewayParameters.png)
 
+
+
 ## Required parameters
 
 - virtualNetworkName string
@@ -32,6 +36,8 @@ They all loop using the same list, and network security groups and route tables 
 - subnets array
 - subnets.name string
 - subnets.subnetPrefix
+
+
 
 ## Optional parameters
 - location string
@@ -41,6 +47,8 @@ They all loop using the same list, and network security groups and route tables 
 - subnet.securityRules array
 - subnet.routes array
 - tags object
+
+
 
 ## How to deploy
 
