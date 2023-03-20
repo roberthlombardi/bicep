@@ -31,85 +31,22 @@ They all loop using the same list, and network security groups and route tables 
 
 ## Parameters
 
-Parameter name | Required | Description
--------------- | -------- | -----------
-virtualNetworkName | Yes      | Name for the Virtual Network
-location       | No       | Location where the resource will be deployed
-virtualNetworkAddressPrefixes | Yes      | List of CIDR ranges that Virtual Network will use
-subnets        | Yes      | List of subnet names, prefixes and security rules for NSG
-tags           | No       | Tags that will be applied to the resource
-
-### virtualNetworkName
-
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
-
-Name for the Virtual Network
-
-### location
-
-![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
-
-Location where the resource will be deployed
-
-- Default value: `[resourceGroup().location]`
-
-### virtualNetworkAddressPrefixes
-
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
-
-List of CIDR ranges that Virtual Network will use
-
-### subnets
-
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
-
-List of subnet names, prefixes and security rules for NSG
-
-### tags
-
-![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
-
-Tags that will be applied to the resource
-
-## Outputs
-
-Name | Type | Description
----- | ---- | -----------
-subnets | array |
-virtualNetwork | object |
-
-## Snippets
-
-### Parameter file
-
-```json
-{
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-    "contentVersion": "1.0.0.0",
-    "metadata": {
-        "template": "C:\\Repository\\github-personal\\bicep-vnet-module\\virtual-network\\modules\\virtualNetwork.json"
-    },
-    "parameters": {
-        "virtualNetworkName": {
-            "value": ""
-        },
-        "location": {
-            "value": "[resourceGroup().location]"
-        },
-        "virtualNetworkAddressPrefixes": {
-            "value": []
-        },
-        "subnets": {
-            "value": []
-        },
-        "tags": {
-            "value": {}
-        }
-    }
-}
-```
+- virtualNetworkName string
+- virtualNetworkAddressPrefixes array
+- subnets array
+- subnets.name string
+- subnets.subnetPrefix
 
 
+
+## Optional parameters
+- location string
+- subnet.delegations
+- subnet.natGatewayName
+- subnet.natGatewayResourceGroup
+- subnet.securityRules array
+- subnet.routes array
+- tags object
 
 
 
