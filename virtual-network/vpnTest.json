@@ -1,0 +1,31 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualNetworkName": {
+            "value": "example-vnet1"
+        },
+        "virtualNetworkAddressPrefixes": {
+            "value": [
+                "10.0.0.0/16"
+                
+            ]
+        },
+      "subnets": {
+        "value": [
+          {
+            "name": "GatewaySubnet",
+            "subnetPrefix": "10.0.0.0/24"
+          },
+          {
+            "name": "AzureFirewallSubnet",
+            "subnetPrefix": "10.0.1.0/24"
+          },
+          {
+            "name": "test-snet1",
+            "subnetPrefix": "10.0.2.0/24"
+          }
+        ]
+      }
+    }
+  }
