@@ -27,6 +27,8 @@ They all loop using the same list, and network security groups and route tables 
 
     ![natGatewayParameters](./media/natGatewayParameters.png)
 
+- Conditional Network Security Group, and Route Table deployment if subnet name is either GatewaySubnet, or AzureFirewallSubnet
+
 
 
 ## Parameters
