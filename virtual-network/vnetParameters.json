@@ -15,15 +15,7 @@
         "value": [
           {
             "name": "example-snet1",
-            "subnetPrefix": "10.0.0.0/24",
-            "delegations": [
-              {
-                "name": "containerInstance",
-                "properties": {
-                  "serviceName": "Microsoft.ContainerInstance/containerGroups"
-                }
-              }
-            ]
+            "subnetPrefix": "10.0.0.0/24"
           }
         ]
       }

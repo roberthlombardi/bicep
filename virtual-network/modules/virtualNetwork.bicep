@@ -28,7 +28,7 @@ resource networkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2021-08-0
 }]
 
 // below block loops through the array 'subnets' with same name as subnet, but replaces 'snet' with 'rt'
-resource routeTable 'Microsoft.Network/routeTables@2022-09-01' = [for (rt, i) in subnets: if(rt.name != 'GatewaySubnet' && rt.name != 'AzureFirewallSubnet') {
+resource routeTable 'Microsoft.Network/routeTables@2022-09-01' = [for (rt, i) in subnets: if(rt.name != 'GatewaySubnet') {
   name: replace(rt.name, 'snet', 'rt')
   location: location
   properties: {
@@ -51,10 +51,10 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2021-05-01' = {
       name: subnet.name 
       properties: {
         addressPrefix: subnet.subnetPrefix
-        networkSecurityGroup: subnet.name != 'GatewaySubnet' && subnet.name != 'AzureFirewallSubnet' ? {
+        networkSecurityGroup: (subnet.name != 'GatewaySubnet' && subnet.name != 'AzureFirewallSubnet') ? {
           id: networkSecurityGroup[i].id
         } : null
-        routeTable: subnet.name != 'GatewaySubnet' && subnet.name != 'AzureFirewallSubnet' ? {
+        routeTable: subnet.name != 'GatewaySubnet' ? {
           id: routeTable[i].id
         } : null
         // below block is a conditional. if the subnet param does not have an entry named "delegations", no subnet delegation will happen 

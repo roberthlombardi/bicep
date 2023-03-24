@@ -19,7 +19,16 @@
           },
           {
             "name": "AzureFirewallSubnet",
-            "subnetPrefix": "10.0.1.0/24"
+            "subnetPrefix": "10.0.1.0/24",
+            "routes": [
+              {
+                "name": "defaultRoute",
+                "properties": {
+                  "addressPrefix": "0.0.0.0/0",
+                  "nextHopType": "Internet"
+                }
+              }
+            ]
           },
           {
             "name": "test-snet1",
